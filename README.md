@@ -13,8 +13,8 @@
   本程序在此基础上完善了中文公司名称识别及行业识别,地址识别的功能
 * 本程序可自由使用
 
-### 版权声明 ###
-* [演示地址](http://logomaker.com.cn:8080/)
+### 效果演示 ###
+* [演示网址](http://logomaker.com.cn:8080/)
 
 ### Author ###
 tianlupan  Email:tianlupan@126.com
