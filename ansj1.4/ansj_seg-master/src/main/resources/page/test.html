@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>演示程序</title>
+
+<style>
+body {
+	padding-top: 50px;
+}
+
+.starter-template {
+	padding: 40px 15px;
+	text-align: center;
+}
+
+input {
+    border: 0;
+    padding: 0;
+}
+
+
+
+.s_ipt_wr {
+    border: 1px solid #b6b6b6;
+    border-color: #7b7b7b #b6b6b6 #b6b6b6 #7b7b7b;
+    background: #fff;
+    display: inline-block;
+    vertical-align: top;
+    width: 460px;
+    height: 34px;
+    margin-right: 0px;
+    line-spacing:20px;
+    border-right-width: 0px;
+    border-color: #b8b8b8 transparent #ccc #b8b8b8;
+    overflow: hidden;
+}
+
+
+.s_ipt {
+    width: 526px;
+    height: 22px;
+    font: 16px/18px arial;
+    line-height: 22px\9;
+    margin: 6px 0 0 7px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+}
+
+
+.s_btn {
+    width: 100px;
+    height: 36px;
+    color: white;
+    font-size: 15px;
+    letter-spacing: 1px;
+    background: #3385ff;
+    border-bottom: 1px solid #2d78f4;
+    margin-left:0px;
+    outline: medium;
+    *border-bottom:0: ;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    position: relative;
+    
+}
+
+
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+
+#load{
+display:none;
+}
+#gridtable{
+display:none;
+}
+
+</style>
+
+
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+
+
+function format(msg){
+	if(msg==null)
+	 return "/";
+	 else return msg;
+}
+
+function formatImage(msg){
+	if(msg==null)
+	 return "/";
+	 else return "<img src="+msg+"/>";
+}
+
+	$(document).ready(
+			function() {
+				$("#segButton").click(function() {
+	
+					$("#load").show();
+					$("#gridtable").hide();
+					$("#gridtable").show();
+								          $('#company').text("我的公司");
+				           // $("#industry").text(format(data.hangye));
+				           // $('#address)'text(format(data.address));
+				           // $('#chenghu').text(format(data.chenghu));
+				           // $('#tag').text(format(data.userTag));
+				           // $('#tupian').html(formatImage(data.image));
+				          //  $("#gridtable").show();
+				          // $("#industry").html(data.hangye);
+				         //  alert(data.hangye);
+
+/*
+					$.ajax({
+				        type: "get",//使用get方法访问后台
+				        dataType: "json",//返回json格式的数据
+				        url: "http://localhost/api.action",//要访问的后台地址
+				        data: "phone="+$("#phone").val(),//要发送的数据
+				        complete :function(){
+				        	alert("complete..");
+				        	$("#load").hide();
+				        },//AJAX请求完成时隐藏loading提示
+				        success: function(data){
+				        alert(data.jigou);
+				        //msg为返回的数据，在这里做数据绑定
+	
+				        }
+			   		 });
+	*/
+	
+	
+				});
+
+			});
+</script>
+
+
+</head>
+
+<body>
+
+	<div style="margin-left:auto; margin-right:auto; width:600px;">
+	
+	<div class="navbar navbar-inverse navbar-fixed-top" >
+		<div class="container">
+			<div class="navbar-header">
+				<span>请输入电话号码，点击查询</span><br />
+				<span style="color:#999999">示例：18064129619, 027-86642326, 02786642326, 4008111111</span>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="container">
+		<form name="form1" id="form1" method="post">
+			<div class="starter-template">
+			<span class="bg s_ipt_wr">
+			<input name="phone" id="phone" class="s_ipt"  maxlength="13" value="18064129619">
+			</span>
+					<input class="bg s_btn" id="segButton" type="button" value="查询号码">
+			</div>
+		</form>
+		<div class="starter-template">
+		
+		<div id="load" style="text-align:left;vertical-align:center; margin-bottom:20px;">
+			<img src="loading.gif" />
+			查询中....
+		</div>
+		
+		<div id="phoneView">
+		
+		<!-- Table goes in the document BODY -->
+		<table class="gridtable" id="gridtable">
+		<tr>
+			<th>公司名称</th><th>行业</th><th>地址</th><th>个人称呼</th><th>用户标记</th><th>图片</th>
+		</tr>
+		<tr>
+			<td id="company">公司名称</td>
+			<td id="industry">从事的行业</td>
+			<td id="address">公司地址：</td>
+			<td id="chenghu">称呼</td>
+			<td id="tag">称呼</td>
+			<td id="tupian"></td>
+		</tr>
+		</table>
+		
+		
+		</div>
+		
+			<h4>查询结果</h4>
+			<iframe name="TO" style="width: 100%"></iframe>
+		</div>
+	</div>
+	
+	</div>
+	
+
+
+
+
+</body>
+</html>
+

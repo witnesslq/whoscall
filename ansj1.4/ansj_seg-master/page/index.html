@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="来电先知，通过网络查找和人工标记方式确定陌生来电身份">
+<meta name="author" content="老田">
+
+<title>来电先知</title>
+
+<style>
+body {
+	padding-top: 50px;
+}
+
+.starter-template {
+	padding: 40px 15px;
+	text-align: center;
+}
+
+input {
+    border: 0;
+    padding: 0;
+}
+
+
+
+.s_ipt_wr {
+    border: 1px solid #b6b6b6;
+    border-color: #7b7b7b #b6b6b6 #b6b6b6 #7b7b7b;
+    background: #fff;
+    display: inline-block;
+    vertical-align: top;
+    width: 460px;
+    height: 34px;
+    margin-right: 0px;
+    line-spacing:20px;
+    border-right-width: 0px;
+    border-color: #b8b8b8 transparent #ccc #b8b8b8;
+    overflow: hidden;
+}
+
+
+.s_ipt {
+    width: 526px;
+    height: 22px;
+    font: 16px/18px arial;
+    line-height: 22px\9;
+    margin: 6px 0 0 7px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+}
+
+
+.s_btn {
+    width: 100px;
+    height: 36px;
+    color: white;
+    font-size: 15px;
+    letter-spacing: 1px;
+    background: #3385ff;
+    border-bottom: 1px solid #2d78f4;
+    margin-left:0px;
+    outline: medium;
+    *border-bottom:0: ;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    position: relative;
+    
+}
+
+
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+
+#load{
+display:none;
+}
+#gridtable{
+display:none;
+}
+
+#tupian img{
+width:60px;
+border:0px;
+}
+
+</style>
+
+
+
+
+</head>
+
+<body>
+
+	<div style="margin-left:auto; margin-right:auto; width:600px;">
+	
+
+	<div class="container">
+	
+	
+	
+		<div style="margin-top:30px; text-align:center;">
+			<img src="logo.jpg"/>
+		</div>
+	
+	
+		<form name="form1" id="form1" method="post">
+			<div class="starter-template">
+			<span class="bg s_ipt_wr">
+			<input name="phone" id="phone" class="s_ipt"  maxlength="13" value="18064129619">
+			</span>
+					<input class="bg s_btn" id="segButton" type="button" value="查询号码">
+			</div>
+		</form>
+		
+		<div id="load" style="text-align:left;vertical-align:center; margin-bottom:20px; text-align:center;">
+			<img src="loading.gif" style="width:40px;" />
+			查询中....
+		</div>
+		
+		
+
+		
+		
+			<div id="phoneView">
+				<!-- Table goes in the document BODY -->
+				<table class="gridtable" id="gridtable">
+				<tr>
+					<th>公司名称</th><th>行业</th><th>地址</th><th>个人称呼</th><th>人工标记</th><th>图片</th>
+				</tr>
+				<tr>
+					<td id="company">公司名称</td>
+					<td id="industry">从事的行业</td>
+					<td id="address">公司地址：</td>
+					<td id="chenghu">称呼</td>
+					<td id="tag">称呼</td>
+					<td id="tupian"></td>
+				</tr>
+				</table>
+				
+				<div id="notfound" style="color:red;display:none;text-align:left;">通过网络未找到此号码信息，可能是私人号码</div>
+			</div>
+
+	
+			<div id="useage" style="margin-top:20px; font-size:12px; color:#666666;line-height:24px;padding-left:18px;">
+				来电先知，通过 <B>网络查找和人工标记</B> 双重方式,精确确定陌生来电者身份<br />
+				市面上的“XX号码通”具有类似功能，它的信息来自人工标注，但信息未必详细准确，比如用户甲收到“小额贷款”推销电话，
+				甲视为骚扰，标记“骚扰电话”，但对于正在筹措资金用户乙来说就不是骚扰电话。<BR />
+				“来电先知”结合人工标记，以及搜索引擎的抓取结果，能够显示陌生来电的详细信息，如公司名称、具体行业、地址、联系人姓名等，便于用户准确判断是否挂断电话<BR />
+				翻开你的来电记录，找条陌生来电试下准确性或点击右边的号码测试 <span id="testPhone"><a href="#" id="a1">18064129619</a>, <a href="#">02787491770</a>, <a href="#">01052989669</a> <br />
+				
+			</div>
+		
+	</div>
+	
+	</div>
+	
+
+<script src="http://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
+<!--
+<script src="js/jquery.min.js"></script>
+-->
+<script>
+
+	function isArray(object){
+	    return object && typeof object==='object' &&
+	            Array == object.constructor;
+	}
+	
+	function isObj(object){
+		return object && typeof object==='object';
+	}
+
+	function format(msg){
+		if(msg==null) return "";
+		else if(isArray(msg))
+		{
+			return msg.join(",");
+		}
+		else if(isObj(msg)){
+			return msg.tag+"("+ msg.type +"用户标注)";
+		}
+		else return msg;
+	}
+	
+	function formatImage(msg){
+		if(msg==null) return "";
+		return "<img src=\""+msg+"\"/>";
+	}
+	
+
+
+	$(document).ready(
+		function() {
+		
+	     //仅限数字
+		 $("#phone").keypress(function(event) {  
+            var keyCode = event.which;  
+            if (keyCode == 46 || (keyCode >= 48 && keyCode <=57))  
+                return true;  
+            else  
+                return false;  
+	        }).focus(function() {   
+	            this.style.imeMode='disabled';  
+	      });  
+				
+		
+			$("#segButton").click(function() {
+				$("#load").show();
+				$("#gridtable").hide();
+				$("#notfound").hide();
+				$.get("api.action", { phone: $("#phone").val()},
+				  function(html){
+					$("#load").hide();
+					var data=eval('(' + html + ')');
+					if(data.found){
+						$("#company").text(format(data.jigou));
+						$("#industry").text(format(data.hangye));
+						$("#address").text(format(data.address));
+						$("#chenghu").text(format(data.chenghu));
+						$("#tag").text(format(data.userTag));
+						$("#tupian").html(formatImage(data.image));
+						$("#gridtable").show();
+					}
+					else
+					{
+						$("#notfound").show("slow");
+					}
+				});
+		    });
+		    
+		    
+		    $("#testPhone a").click(function(){
+		    	var phone=$(this).text();
+		    	$("#phone").val(phone);
+		    	$("#segButton").click();
+		    });
+		  
+
+	  });
+</script>
+
+
+
+</body>
+</html>
+
