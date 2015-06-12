@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <CheckBox
+            android:id="@+id/chbOnCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_on_call" />
+
+
+    <CheckBox
+        android:id="@+id/chbAutoNetwork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_auto_network"
+        android:visibility="gone"
+            />
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+          android:id="@+id/btnFloatWindow"
+            android:text="显示浮窗"
+            />
+    
+    
+    <EditText android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/settings_text_api_url"
+        android:id="@+id/txtApiURL"
+        android:visibility="gone"
+            ></EditText>
+    
+    <Button android:id="@+id/btnOK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="保存设置"
+        android:visibility="gone"
+            ></Button>
+    
+        
+    <EditText android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="要查询的号码，如18064129619"
+        android:inputType="phone"
+        android:id="@+id/txtPhone"
+        android:layout_marginTop="20dp"
+            ></EditText>
+    
+    
+        <Button android:id="@+id/btnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查询"></Button>
+        
+                
+
+        <TextView 
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/txtResult"
+           android:textSize="16sp"
+            ></TextView>
+    
+
+</LinearLayout>

@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">来电先知</string>
+    
+    <string name="settings_auto_network">自动联网，查找来电者信息</string>
+    <string name="settings_text_api_url">服务器地址：</string>
+    <string name="settings_on_call">开启来电管家功能</string>
+
+</resources>
