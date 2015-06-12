@@ -40,6 +40,7 @@ public class AnsjServer {
 	private final static String CLOSE_COMMAND = "关闭服务器";
 	
 	private final static String ACTION_PATH="api.action";
+	private final static String ACTION_LOG="log.action";
 	private final static String WWW_ROOT_DIR="page";
 	private final static String DEFAULT_PAGE="index.html";
 	
@@ -80,7 +81,13 @@ public class AnsjServer {
 				if(TextUtils.isEmpty(path) || path.equals("/")  ) path="/"+ DEFAULT_PAGE;
 				path=WWW_ROOT_DIR+path;
 				System.out.println("path="+path);
-				
+
+
+				if(path.contains(ACTION_LOG)){
+					writeToClient(httpExchange,AnsjServlet.getParseLog());
+					return;
+				}
+
 				if (!path.contains(ACTION_PATH)) {
 		/*			httpExchange.getResponseHeaders().set("Content-Type",
 							"text/html; charset=utf-8");

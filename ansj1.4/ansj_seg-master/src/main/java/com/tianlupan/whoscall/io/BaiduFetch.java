@@ -2,6 +2,7 @@ package com.tianlupan.whoscall.io;
 
 import java.util.List;
 
+import com.tianlupan.whoscall.AnsjServlet;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import com.tianlupan.whoscall.TextUtils;
@@ -48,8 +49,6 @@ public class BaiduFetch extends ISearchEngine {
 
 		HttpDownload httpDownload = new HttpDownload();
 		String html = httpDownload.getHtml(url);
-
-	 System.out.println("html="+html);
 
 		List<String> recordList = TextUtils.getList(html, RECORD_TAG_START,
 				RECORD_TAG_END);
@@ -110,6 +109,11 @@ public class BaiduFetch extends ISearchEngine {
 			AddToGuanjia(guanjiArray, biaoji, biaojiType, biaojiCount);
 
 			jsonObject.put(NTRecordSet.JSON_GUANJIA, guanjiArray);
+
+			AnsjServlet.appendParseLog("在搜索引擎发现用户标注信息:"+guanjiArray.toString());
+
+		}else{
+			AnsjServlet.appendParseLog("在搜索引擎未发现用户标注信息, 开始分词解析");
 		}
 
 		return jsonObject;

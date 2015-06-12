@@ -21,6 +21,8 @@ public class AnsjServlet {
 	
 	private final static int ERROR_CODE_ERROR=102;
 	private final static String ERROR_CODE_ERROR_MSG="发生错误";
+
+	private static StringBuilder parseLogs=new StringBuilder();
 	
 
 	private static String faultMsg(int code,String reason)
@@ -35,12 +37,26 @@ public class AnsjServlet {
 		void onFinish();
 	}
 
+	public static String getParseLog(){
+		return parseLogs.toString();
+	}
+
+	private static void clearParseLogs(){
+		parseLogs=new StringBuilder();
+	}
+
+	public static void appendParseLog(String log){
+		System.out.println(log);
+		parseLogs.append(log + "\n");
+	}
+
 	/**
 	 * 用户直接查询号码标记，如面跟着号码，如tellme:18064120000
 	 */
 
 	public static void processRequest(String input, int method,OnCallback onCallback) throws IOException {
-	
+
+		clearParseLogs();
 		
 		if(TextUtils.isEmpty(input))
 		{
@@ -57,17 +73,19 @@ public class AnsjServlet {
 			if(!phoneNumber.isValid())
 			{
 				onCallback.onError(FAIL_REASON_NOT_VALID_NUMBER_CODE,FAIL_REASON_NOT_VALID_NUMBER);
+				return;
 			}
 
-			System.out.println("用户查询号码=" + input + " method=" + (method == 1 ? "NLP" : "TO"));
+			appendParseLog("用户查询号码=" + input + " , 分词方式=" + (method == 1 ? "NLP" : "TO"));
+
 			IDatabase database= TempSave.getInstance();
 
-			String phoneHistory=database.get(lowerInput);
+			String phoneHistory=database.get(phoneNumber.getSearchFormat());
 			if(!TextUtils.isEmpty(phoneHistory))
 			{
-				String nt=database.get(input);
-				System.out.println("用户查询号码=" + input + ", 从缓存中返回:" + nt+", 缓存会在服务器重启时清除");
-				onCallback.onResult(nt);
+				//String nt=database.get(input);
+				appendParseLog("从缓存中返回:" + phoneHistory + ", 缓存会在服务器重启时清除");
+				onCallback.onResult(phoneHistory);
 				onCallback.onFinish();
 			}
 			else {
@@ -92,8 +110,15 @@ public class AnsjServlet {
 					if(searchResult.mine())
 						onCallback.onResult(searchResult.getPhoneResult().toString());
 				*/
-				if(searchResult.isMinableDomain())
+
+				appendParseLog("解析完毕");
+				if(searchResult.isMinableDomain()){
+					appendParseLog("发现可以进一步挖掘网站,进一步解析");
 					searchResult.mine();
+				}
+
+				appendParseLog("#########最终结果############");
+				appendParseLog(searchResult.getPhoneResult().toString());
 				onCallback.onResult(searchResult.getPhoneResult().toString());
 				onCallback.onFinish();
 				

@@ -1,5 +1,7 @@
 package com.tianlupan.whoscall.mining;
 
+import com.tianlupan.whoscall.AnsjServlet;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -59,9 +61,8 @@ public class SearchResult {
 	{
 		searchEngine.doSearch(phone);
 		searchItems = searchEngine.items;
-		
-		System.out.println("==============&&&&===");
-		System.out.println("searchItems:"+searchItems);
+
+		AnsjServlet.appendParseLog("searchItems:" + searchItems);
 		
 		tagItems=searchEngine.tags;
 		computeResult();

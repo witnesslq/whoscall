@@ -121,7 +121,6 @@ public class NTUtil {
 	 * 按条加载资源文件并添加进set
 	 * 
 	 * @param file
-	 * @param set
 	 */
 	private static HashSet<String> loadToSet(String file) {
 
@@ -194,7 +193,7 @@ public class NTUtil {
 	/**
 	 * 添加进公司词典
 	 * 
-	 * @param cMap
+	 * @param nMap
 	 */
 	public static void appendNT(HashMap<String, int[]> nMap) {
 		Iterator<String> iterator = gongsiSet.iterator();
@@ -986,6 +985,7 @@ public class NTUtil {
 	// 需要处理 [【/w, 豆豆/nz, 智慧/n, 旅馆/nt, (, 武汉/ns, 工大/j, 路/n, 店/n, ), 】/w
 
 	private static void log(String msg) {
+		AnsjServlet.appendParseLog(msg);
 		if (ntDebug) {
 			MyStaticValue.Log4j.debug(msg);
 		}
@@ -1038,7 +1038,6 @@ public class NTUtil {
 	/**
 	 * 检查人名前面是否为联系人：
 	 * 
-	 * @param prevTerm
 	 * @return
 	 */
 	private static boolean isNrPrevContact(List<Term> list, int nrIndex) {

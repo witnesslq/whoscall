@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.tianlupan.whoscall.AnsjServlet;
 import com.tianlupan.whoscall.NTUtil;
 import org.ansj.domain.Term;
 import org.ansj.splitWord.analysis.NlpAnalysis;
@@ -177,7 +178,7 @@ public class SearchResultParser {
 	
 	private void computeScore(List<Term> terms, String nature,Hashtable<String,Integer> table)
 	{
-
+		AnsjServlet.appendParseLog("开始计算结果权重与排名");
 		HashSet<String> processedList=new HashSet<String>();
 		
 		for(Term term:terms)
@@ -189,7 +190,7 @@ public class SearchResultParser {
 				//不能在一个记录里重复核算多次同一内容，如  联合集团有限公司  主页 >联合集团有限公司  公司名称>联合集团有限公司
 				if(processedList.contains(termName))
 				{
-					System.out.println("同一记录出现多次，跳 过="+termName);
+					AnsjServlet.appendParseLog("同一记录出现多次，跳 过=" + termName);
 					continue;
 				}
 				
@@ -211,7 +212,7 @@ public class SearchResultParser {
 						
 						if(similarScore>0)
 						{
-							MyStaticValue.Log4j.debug("term加分， term="+entry.getKey()+", 分数="+similarScore);
+							AnsjServlet.appendParseLog("term加分， term=" + entry.getKey() + ", 分数=" + similarScore);
 							addScore(table,entry.getKey(),similarScore);
 							//找到最大相似度
 							if(similarScore>similarMaxScore)
@@ -220,12 +221,12 @@ public class SearchResultParser {
 					}
 					
 					//设置为初始分值+相似度最大值
-					MyStaticValue.Log4j.debug("添加新的term="+termName+", 类型;"+nature);
+					AnsjServlet.appendParseLog("添加新的term=" + termName + ", 类型;" + nature);
 					table.put(termName,initScore+similarMaxScore);
 				}
 				else {
 					//如果已经包括，则加重复分
-					MyStaticValue.Log4j.debug("term包含 一模一样的， term="+termName+", 加分 ="+SCORE_REPEATE);
+					AnsjServlet.appendParseLog("term包含 一模一样的， term=" + termName + ", 加分 =" + SCORE_REPEATE);
 					addScore(table, termName, SCORE_REPEATE);
 				}
 			}
@@ -377,7 +378,7 @@ public class SearchResultParser {
 
 		Collections.sort(list);
 
-		MyStaticValue.Log4j.debug("getMax list="+list);
+		AnsjServlet.appendParseLog("getMax list=" + list);
 		
 		if (maxCount < list.size()) {
 			list = list.subList(0, maxCount);
@@ -389,7 +390,7 @@ public class SearchResultParser {
 	
 	private static String getMax(Hashtable<String, Integer> table) {
 		List<TableItem> list = getMax(table, 1);
-		MyStaticValue.Log4j.debug("get Max list="+list);
+		AnsjServlet.appendParseLog("排名结果 =" + list);
 		return list.size() > 0 ? list.get(0).getKey() : null;
 	}
 	

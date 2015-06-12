@@ -9,70 +9,17 @@
 
 <title>来电先知</title>
 
+<link href="http://apps.bdimg.com/libs/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+
 <style>
 body {
 	padding-top: 50px;
-}
-
-.starter-template {
-	padding: 40px 15px;
-	text-align: center;
 }
 
 input {
     border: 0;
     padding: 0;
 }
-
-
-
-.s_ipt_wr {
-    border: 1px solid #b6b6b6;
-    border-color: #7b7b7b #b6b6b6 #b6b6b6 #7b7b7b;
-    background: #fff;
-    display: inline-block;
-    vertical-align: top;
-    width: 460px;
-    height: 34px;
-    margin-right: 0px;
-    line-spacing:20px;
-    border-right-width: 0px;
-    border-color: #b8b8b8 transparent #ccc #b8b8b8;
-    overflow: hidden;
-}
-
-
-.s_ipt {
-    width: 526px;
-    height: 22px;
-    font: 16px/18px arial;
-    line-height: 22px\9;
-    margin: 6px 0 0 7px;
-    padding: 0;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    -webkit-appearance: none;
-}
-
-
-.s_btn {
-    width: 100px;
-    height: 36px;
-    color: white;
-    font-size: 15px;
-    letter-spacing: 1px;
-    background: #3385ff;
-    border-bottom: 1px solid #2d78f4;
-    margin-left:0px;
-    outline: medium;
-    *border-bottom:0: ;
-    -webkit-appearance: none;
-    -webkit-border-radius: 0;
-    position: relative;
-    
-}
-
 
 table.gridtable {
 	font-family: verdana,arial,sans-serif;
@@ -118,71 +65,107 @@ border:0px;
 
 <body>
 
-	<div style="margin-left:auto; margin-right:auto; width:600px;">
+	<div style="margin-left:auto; margin-right:auto; width:760px; text-align: center;">
 	
+				<img src="logo.jpg" style="margin: 30px;"/>
 
-	<div class="container">
-	
-	
-	
-		<div style="margin-top:30px; text-align:center;">
-			<img src="logo.jpg"/>
-		</div>
-	
-	
-		<form name="form1" id="form1" method="post">
-			<div class="starter-template">
-			<span class="bg s_ipt_wr">
-			<input name="phone" id="phone" class="s_ipt"  maxlength="13" value="18064129619">
-			</span>
-					<input class="bg s_btn" id="segButton" type="button" value="查询号码">
-			</div>
-		</form>
-		
-		<div id="load" style="text-align:left;vertical-align:center; margin-bottom:20px; text-align:center;">
-			<img src="loading.gif" style="width:40px;" />
-			查询中....
-		</div>
-		
-		
+	<div  style="margin-left: 150px;">
+			<div class="row">
+					<div class="col-lg-6">
+					<div class="input-group">
 
-		
-		
-			<div id="phoneView">
-				<!-- Table goes in the document BODY -->
-				<table class="gridtable" id="gridtable">
-				<tr>
-					<th>公司名称</th><th>行业</th><th>地址</th><th>个人称呼</th><th>人工标记</th><th>图片</th>
-				</tr>
-				<tr>
-					<td id="company">公司名称</td>
-					<td id="industry">从事的行业</td>
-					<td id="address">公司地址：</td>
-					<td id="chenghu">称呼</td>
-					<td id="tag">称呼</td>
-					<td id="tupian"></td>
-				</tr>
-				</table>
-				
-				<div id="notfound" style="color:red;display:none;text-align:left;">通过网络未找到此号码信息，可能是私人号码</div>
-			</div>
+						<span class="input-group-addon" id="sizing-addon1">
+							<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+						</span>
 
-	
-			<div id="useage" style="margin-top:20px; font-size:12px; color:#666666;line-height:24px;padding-left:18px;">
-				来电先知，通过 <B>网络查找和人工标记</B> 双重方式,精确确定陌生来电者身份<br />
-				市面上的“XX号码通”具有类似功能，它的信息来自人工标注，但信息未必详细准确，比如用户甲收到“小额贷款”推销电话，
-				甲视为骚扰，标记“骚扰电话”，但对于正在筹措资金用户乙来说就不是骚扰电话。<BR />
-				“来电先知”结合人工标记，以及搜索引擎的抓取结果，能够显示陌生来电的详细信息，如公司名称、具体行业、地址、联系人姓名等，便于用户准确判断是否挂断电话<BR />
-				翻开你的来电记录，找条陌生来电试下准确性或点击右边的号码测试 <span id="testPhone"><a href="#" id="a1">18064129619</a>, <a href="#">02787491770</a>, <a href="#">01052989669</a> <br />
-				
+						<input type="text" id="phone" class="form-control" placeholder="请输入来电号码,如: 010-82618899" style="width: 300px;">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="segButton">查询</button>
+      </span>
+					</div><!-- /input-group -->
+				</div><!-- /.col-lg-6 -->
+
+
+
+			</div><!-- /.row -->
+
+			<ul class="nav nav-tabs" id="myTab" style="margin-top: 40px;">
+				<li class="active"><a href="#usage">使用说明</a></li>
+				<li><a href="#searchResult" id="showLink">搜索结果</a></li>
+				<li><a href="#appDownload">手机客户端</a></li>
+				<li><a href="#source">开源代码</a></li>
+			</ul>
+
+			<div class="tab-content" style="margin: 10px; text-align: left;">
+
+				<div class="tab-pane   active" id="usage">
+					<span id="helpBlock" class="help-block">通过从搜索引擎抓取号码相关信息, 精确识别陌生来电者身份 <br />
+				细至公司名称、具体行业、地址、联系人姓名等</span>
+				</div>
+
+				<div class="tab-pane" id="searchResult">
+
+					<div id="load">
+						<img src="loading.gif" style="width:40px;" />
+						查询中....
+					</div>
+
+
+					<div id="phoneView">
+						<table class="gridtable" id="gridtable">
+							<tr>
+								<th>公司名称</th><th>行业</th><th>地址</th><th>个人称呼</th><th>人工标记</th><th>图片</th>
+							</tr>
+							<tr>
+								<td id="company">公司名称</td>
+								<td id="industry">从事的行业</td>
+								<td id="address">公司地址：</td>
+								<td id="chenghu">称呼</td>
+								<td id="tag">称呼</td>
+								<td id="tupian"></td>
+							</tr>
+							<tr>
+								<td colspan="6">
+									<button class="btn btn-default" type="button" id="showLog">显示解析过程</button><br />
+									<textarea style="width: 100%; height: 200px;background-color: black; color:white;" wrap="off" style="overflow:scroll;" id="logView">
+
+
+									</textarea>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div id="notFound" style="color:red; display:none;">通过网络未找到此号码信息，可能是私人号码</div>
+
+				</div>
+
+				<div class="tab-pane" id="appDownload">
+
+					目前仅提供Android客户端 DEMO<br /><p style="height: 10px;"/>
+
+					下载地址:<a href="app/whoscall.apk" target="_blank">点击下载</a><p /><p />
+
+					<p style="height: 20px;"></p>
+					Android客户端 扫码安装 : (微信扫一扫) <br />
+					<img src="app/android_2vm.png" title="扫码下载" style="margin-top: 10px;" />
+
+
+				</div>
+
+				<div class="tab-pane" id="source">
+					本程序已经发布为开源程序,可自由使用.<br />
+					Version Control:git, host on Bitbucket<br />
+					<a href="https://bitbucket.org/laotian/whoscall" target="_blank">查看代码</a>
+				</div>
+
 			</div>
-		
+	</div>
 	</div>
 	
-	</div>
-	
 
-<script src="http://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/jquery/1.4.2/jquery.min.js"></script>
+
 <!--
 <script src="js/jquery.min.js"></script>
 -->
@@ -218,7 +201,16 @@ border:0px;
 
 	$(document).ready(
 		function() {
-		
+
+		$("#myTab a").click(function(e){
+			e.preventDefault();
+			$("#myTab li").removeClass("active");
+			$(this).parent().addClass("active");
+			$(".tab-pane").hide();
+			$($(this).attr("href")).show();
+		});
+
+
 	     //仅限数字
 		 $("#phone").keypress(function(event) {  
             var keyCode = event.which;  
@@ -228,16 +220,30 @@ border:0px;
                 return false;  
 	        }).focus(function() {   
 	            this.style.imeMode='disabled';  
-	      });  
+	      });
+
+			$("#showLog").click(function(){
+				$("#logView").hide();
+				$.get("log.action",{},function(html){
+					$("#logView").text(html);
+					$("#logView").show("slow");
+				});
+			});
 				
 		
 			$("#segButton").click(function() {
-				$("#load").show();
+
 				$("#gridtable").hide();
-				$("#notfound").hide();
+				$("#notFound").hide();
+				$("#load").show();
+				$("#showLink").click();
+				$("#showLog").hide();
+				$("#logView").hide();
+
 				$.get("api.action", { phone: $("#phone").val()},
 				  function(html){
 					$("#load").hide();
+					$("#showLink").click();
 					var data=eval('(' + html + ')');
 					if(data.found){
 						$("#company").text(format(data.jigou));
@@ -247,10 +253,11 @@ border:0px;
 						$("#tag").text(format(data.userTag));
 						$("#tupian").html(formatImage(data.image));
 						$("#gridtable").show();
+						$("#showLog").show();
 					}
 					else
 					{
-						$("#notfound").show("slow");
+						$("#notFound").show("slow");
 					}
 				});
 		    });
