@@ -79,6 +79,13 @@ public class FloatWindow {
         show(context,phoneResult,DELAY_CLOSE);
     }
 
+    private void showFound(boolean found){
+        if(floatView!=null){
+            TextView noFoundTextView= (TextView) floatView.findViewById(R.id.onCallNotFound);
+            noFoundTextView.setVisibility(found ? View.GONE : View.VISIBLE);
+        }
+    }
+
 
     public void show(Context context, PhoneResult phoneResult,int seconds) {
         closeFloatView();
@@ -86,10 +93,20 @@ public class FloatWindow {
             floatView = View.inflate(context, R.layout.oncall,null);
         }
 
-        setTextContent(R.id.onCallChenghu,phoneResult.getChenghu());
-        setTextContent(R.id.onCallJigou,phoneResult.getJigou());
-        setTextContent(R.id.onCallHangye,phoneResult.getHangye());
-        setTextContent(R.id.onCallAddress, phoneResult.getAddress());
+        if(phoneResult.getHasResult()){
+            setTextContent(R.id.onCallChenghu,phoneResult.getChenghu());
+            setTextContent(R.id.onCallJigou,phoneResult.getJigou());
+            setTextContent(R.id.onCallHangye,phoneResult.getHangye());
+            setTextContent(R.id.onCallAddress, phoneResult.getAddress());
+            showFound(true);
+        }else{
+            setTextContent(R.id.onCallChenghu,null);
+            setTextContent(R.id.onCallJigou,null);
+            setTextContent(R.id.onCallHangye,null);
+            setTextContent(R.id.onCallAddress, null);
+            showFound(false);
+        }
+
 
         setImage(R.id.onCallImage, phoneResult.getImageURL());
 

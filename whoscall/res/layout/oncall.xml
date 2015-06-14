@@ -41,5 +41,12 @@
                android:id="@+id/onCallImage"
             />
 
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="未发现相关信息，可能是私人号码"
+              style="@style/OnCallText"
+              android:id="@+id/onCallNotFound"
+              android:visibility="gone"
+            />
+
 
 </RelativeLayout>
