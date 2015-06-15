@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="@drawable/gradient_bg"
-                android:padding="4dp"
+              android:orientation="vertical">
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:id="@+id/onCallLoadingView">
+
+        <ProgressBar
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar" android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="5dp"
+                />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="正在识别来电身份..."
+                  android:layout_toRightOf="@id/progressBar"
+                  android:layout_centerVertical="true"
+                  style="@style/onCallTextSmall"
+                />
+
+    </RelativeLayout>
+
+<RelativeLayout
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="4dp"
+              android:id="@+id/onCallResultView"
         >
 
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:text="称呼" style="@style/OnCallText"
+              android:text="称呼" style="@style/onCallTextBig"
               android:id="@+id/onCallChenghu"
     />
 
@@ -22,14 +49,14 @@
 
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:text="行业"  style="@style/OnCallText"
+              android:text="行业"  style="@style/onCallTextSmall"
               android:id="@+id/onCallHangye"
               android:layout_below="@id/onCallJigou"
             />
 
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:text="地址"  style="@style/OnCallText"
+              android:text="地址"  style="@style/onCallTextSmall"
               android:id="@+id/onCallAddress"
               android:layout_below="@id/onCallHangye"
             />
@@ -40,13 +67,12 @@
                android:scaleType="fitXY"
                android:id="@+id/onCallImage"
             />
+</RelativeLayout>
 
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="未发现相关信息，可能是私人号码"
+              android:text="未发现相关信息，可能是私人号码"
               style="@style/OnCallText"
               android:id="@+id/onCallNotFound"
               android:visibility="gone"
             />
-
-
-</RelativeLayout>
+</LinearLayout>

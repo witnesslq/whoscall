@@ -20,7 +20,6 @@ public class PhoneResult {
 		try {
 			JSONTokener jsonParser = new JSONTokener(json);
 			// 此时还未读取任何json文本，直接读取就是一个JSONObject对象。
-			// 如果此时的读取位置在"name" : 了，那么nextValue就是"yuanzhifei89"（String）
 			JSONObject phoneResult = (JSONObject) jsonParser.nextValue();
 			// 接下来的就是JSON对象的操作了
 

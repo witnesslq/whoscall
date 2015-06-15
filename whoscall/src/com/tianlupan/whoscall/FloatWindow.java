@@ -32,7 +32,7 @@ public class FloatWindow {
     private static final int MESSAGE_CLEAR=0x1;
 
     /**
-     * Ĭ�Ϲر�ʱ��,10��
+     *  默认延迟关闭时间
      */
     private static final int DELAY_CLOSE=10;
 
@@ -75,40 +75,46 @@ public class FloatWindow {
         }
     }
 
+    /**
+     * 显示提示信息
+     * @param context
+     * @param phoneResult 如果为null,显示loading,如果为hasFound为true显示结果,否则显示示找到
+     */
     public void show(Context context,PhoneResult phoneResult){
         show(context,phoneResult,DELAY_CLOSE);
     }
 
-    private void showFound(boolean found){
-        if(floatView!=null){
-            TextView noFoundTextView= (TextView) floatView.findViewById(R.id.onCallNotFound);
-            noFoundTextView.setVisibility(found ? View.GONE : View.VISIBLE);
-        }
-    }
-
-
+    /**
+     * 显示提示信息
+     * @param context
+     * @param phoneResult 如果为null,显示loading,如果为hasFound为true显示结果,否则显示示找到
+     * @param  seconds 延迟关闭时间
+     */
     public void show(Context context, PhoneResult phoneResult,int seconds) {
         closeFloatView();
-        if(floatView==null){
-            floatView = View.inflate(context, R.layout.oncall,null);
-        }
 
-        if(phoneResult.getHasResult()){
-            setTextContent(R.id.onCallChenghu,phoneResult.getChenghu());
+        floatView = View.inflate(context, R.layout.oncall,null);
+
+        View viewLoading=floatView.findViewById(R.id.onCallLoadingView);
+        View viewResult=floatView.findViewById(R.id.onCallResultView);
+        View viewNotFound=floatView.findViewById(R.id.onCallNotFound);
+
+        viewLoading.setVisibility(View.GONE);
+        viewResult.setVisibility(View.GONE);
+        viewNotFound.setVisibility(View.GONE);
+
+        if(phoneResult==null){
+            viewLoading.setVisibility(View.VISIBLE);
+        }else if(phoneResult.getHasResult()){
+            viewResult.setVisibility(View.VISIBLE);
+            setTextContent(R.id.onCallChenghu, phoneResult.getChenghu());
             setTextContent(R.id.onCallJigou,phoneResult.getJigou());
             setTextContent(R.id.onCallHangye,phoneResult.getHangye());
             setTextContent(R.id.onCallAddress, phoneResult.getAddress());
-            showFound(true);
+            setImage(R.id.onCallImage, phoneResult.getImageURL());
         }else{
-            setTextContent(R.id.onCallChenghu,null);
-            setTextContent(R.id.onCallJigou,null);
-            setTextContent(R.id.onCallHangye,null);
-            setTextContent(R.id.onCallAddress, null);
-            showFound(false);
+            viewNotFound.setVisibility(View.VISIBLE);
         }
-
-
-        setImage(R.id.onCallImage, phoneResult.getImageURL());
 
         wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         params = new WindowManager.LayoutParams(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT,

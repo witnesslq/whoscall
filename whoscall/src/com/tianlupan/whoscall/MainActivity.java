@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
         Boolean isConnected = Utils.isConnected(MainActivity.this);
 
         if (TextUtils.isEmpty(txtPhone.getText().toString())) {
-            Toast.makeText(MainActivity.this, "ÉèÖÃÄãÒª²éÑ¯µÄºÅÂë",
+            Toast.makeText(MainActivity.this, "è¯·å¡«å†™è¦æŸ¥è¯¢çš„ç”µè¯å·ç ",
                     Toast.LENGTH_LONG).show();
             return;
         }
@@ -55,6 +55,8 @@ public class MainActivity extends Activity {
             collapseSoftInputMethod();
             String number=txtPhone.getText().toString();
             Log.i(TAG, "getNumber=" + number);
+
+            FloatWindow.getInstance().show(MainActivity.this, null, 10);
 
             RemoteAPI.getPhone(number, new RemoteAPICallback() {
 
@@ -77,7 +79,7 @@ public class MainActivity extends Activity {
                 }
             });
         } else {
-            Toast.makeText(MainActivity.this, "ÏÈÁ¬ÉÏÍøÔÙ²âÊÔ",
+            Toast.makeText(MainActivity.this, "éœ€è¦å…ˆè¿æ¥ç½‘ç»œ",
                     Toast.LENGTH_LONG).show();
         }
     }
@@ -88,7 +90,6 @@ public class MainActivity extends Activity {
         btnSearch = (Button) findViewById(R.id.btnSearch);
 
         chbOnCall=(CheckBox) findViewById(R.id.chbOnCall);
-        //´Ë°æ²âÊÔ²»ÏÔÊ¾ÉèÖÃ
         chbOnCall.setChecked(Utils.getShowOnCall(this));
         chbOnCall.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
