@@ -1,2 +1,0 @@
-cd "C:\work\workspace\ansj1.4\ansj_seg-master"
-java  -Xms800m -Xmx1024m -Dfile.encoding=utf-8  -jar "target/ansj_seg-2.0.1.jar"

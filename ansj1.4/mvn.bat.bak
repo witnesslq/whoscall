@@ -1,6 +1,0 @@
-cd "D:\java\ansj1.4\ansj_seg-master"
-mvn assembly:assembly
-cd "D:\java\ansj1.4\ansj_seg-master\target"
-del who.jar
-ren "ansj_seg-2.0.1-jar-with-dependencies.jar" "who.jar"
-cd "D:\java\ansj1.4\ansj_seg-master"
