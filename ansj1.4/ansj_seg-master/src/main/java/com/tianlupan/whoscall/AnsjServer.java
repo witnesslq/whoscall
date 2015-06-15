@@ -254,6 +254,8 @@ public class AnsjServer {
 			else if(path.toLowerCase().endsWith(".js"))
 			{
 				contentType="application/Json";
+			}else if(path.toLowerCase().endsWith(".apk")){
+				contentType="application/vnd.android";
 			}
 			
 			byte[] bytes=null;
