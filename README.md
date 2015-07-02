@@ -20,7 +20,7 @@
 ##
 
 ### 效果演示 ###
-* [演示网址](http://logomaker.com.cn:8080/)
+* [演示网址](http://www.tianlupan.com:8080/)
 
 ### Author ###
 tianlupan  Email:tianlupan@126.com
